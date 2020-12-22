@@ -7,11 +7,9 @@ import yaml
 from pyrogram import idle
 from spam import clients, log
 
-from spam.modules import ALL_MODULES
+from spam.modules import ALL_MODULES, HELP_COMMANDS
 
 BOT_RUNTIME = 0
-HELP_COMMANDS = {}
-
 loop = asyncio.get_event_loop()
 
 async def get_runtime():
@@ -34,6 +32,7 @@ async def reinitial():
     await asyncio.gather(*(app.start() for app in clients))
 
 async def start_bot():
+    global HELP_COMMANDS, ALL_MODULES
     # sys.excepthook = except_hook
     print("----- Checking user and bot... -----")
     await reinitial()

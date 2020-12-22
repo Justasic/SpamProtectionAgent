@@ -11,6 +11,7 @@ from pyrogram import Client, errors
 StartTime = time.time()
 logging.basicConfig(level=logging.INFO)
 log = logging.getLogger()
+HELP_COMMANDS = {}
 clients = []
 
 # if version < 3.6, stop bot.
