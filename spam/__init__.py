@@ -34,5 +34,5 @@ with Path('sessions') as p:
         quit(1)
     
 for sessh in config['config']['sessions']:
-    client = Client(sessh, api_id=config['telegram']['api_id'], api_hash=config['telegram']['api_hash'], workdir='sessions')
+    client = Client(sessh, api_id=config['telegram']['api_id'], api_hash=config['telegram']['api_hash'], plugins={'root': os.path.join(__package__, 'modules')}, workdir='sessions')
     clients.append(client)

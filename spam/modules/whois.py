@@ -84,7 +84,6 @@ def ProfilePicUpdate(user_pic):
 
 @Client.on_message(filters.me & filters.command(["whois"], prefixes=config['config']['prefixes']))
 async def whois(client, message):
-    print("LMAOOOOOOOOOOOOO")
     cmd = message.command
     if not message.reply_to_message and len(cmd) == 1:
         get_user = message.from_user.id
