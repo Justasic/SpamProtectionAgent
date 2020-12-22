@@ -3,8 +3,9 @@ import importlib
 import sys
 import time
 import traceback
-
-from spam import clients
+import yaml
+from pyrogram import idle
+from spam import clients, log
 
 from spam.modules import ALL_MODULES
 
@@ -13,21 +14,24 @@ HELP_COMMANDS = {}
 
 loop = asyncio.get_event_loop()
 
-
 async def get_runtime():
     return BOT_RUNTIME
 
 async def reload_userbot():
-    await clients[0].start()
+    try:
+        with open('config.yaml') as c:
+            config = yaml.safe_load(c)
+    except FileNotFoundError:
+        log.error("You must create a config.yaml file, edit the example yaml file and rename it to config.yaml")
 
+    await reinitial()
 
     for modul in ALL_MODULES:
         imported_module = importlib.import_module("spam.modules." + modul)
         importlib.reload(imported_module)
 
 async def reinitial():
-    await clients[0].start()
-
+    await asyncio.gather(*(app.start() for app in clients))
 
 async def start_bot():
     # sys.excepthook = except_hook
@@ -49,7 +53,8 @@ async def start_bot():
     print("SpamProtection modules: " + str(ALL_MODULES))
     print("-----------------------")
     print("Bot run successfully!")
-    await clients[0].idle()
+    await idle()
+    await asyncio.gather(*(app.stop() for app in clients))
 
 if __name__ == '__main__':
     BOT_RUNTIME = int(time.time())

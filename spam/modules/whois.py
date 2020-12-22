@@ -1,10 +1,12 @@
 from datetime import datetime
 from asyncio import sleep
 
-from pyrogram import Filters, User
-from pyrogram.api import functions
+from pyrogram import filters, Client
+from pyrogram.types import User
+from pyrogram.raw import functions
 from pyrogram.errors import PeerIdInvalid
 
+from spam import config
 # from spam import clients, Command
 
 __MODULE__ = "Whois"
@@ -80,8 +82,9 @@ def ProfilePicUpdate(user_pic):
     return datetime.fromtimestamp(user_pic[0].date).strftime("%d.%m.%Y, %H:%M:%S")
 
 
-# @clients.on_message(Filters.me & Filters.command(["whois"], Command))
+@Client.on_message(filters.me & filters.command(["whois"], prefixes=config['config']['prefixes']))
 async def whois(client, message):
+    print("LMAOOOOOOOOOOOOO")
     cmd = message.command
     if not message.reply_to_message and len(cmd) == 1:
         get_user = message.from_user.id

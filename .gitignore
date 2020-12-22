@@ -126,5 +126,5 @@ dmypy.json
 
 # Pyrogram stuff + Userbot config
 *.session
-spam/config.py
+config.yaml
 *.session-journal

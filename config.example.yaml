@@ -1,0 +1,12 @@
+telegram:
+    api_id: 0
+    api_hash: https://my.telegram.org
+    slave_bot_token: https://t.me/BotFather
+
+config:
+    # This is the prefix used for commands (dot is most common)
+    prefixes:
+        - .
+    sessions: 
+      - yourusername
+
