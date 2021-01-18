@@ -2,7 +2,6 @@ import html
 from pyrogram import filters, Client
 from spam import log, HELP_COMMANDS, config
 
-
 def __list_all_modules():
     from os.path import dirname, basename, isfile
     import glob
@@ -19,7 +18,9 @@ async def help(client, message):
     command.pop(0)
     if command:
         if command[0].lower() in HELP_COMMANDS:
-            await message.edit(HELP_COMMANDS[command[0].lower()].__HELP__)
+            mod = HELP_COMMANDS[command[0].lower()]
+            helpmsg = f"──「 **{mod.__MODULE__}** 」──\n{mod.__HELP__}"
+            await message.edit(helpmsg)
         else:
             await message.edit(f"<code>{html.escape(command[0])}</code> is not a valid command")
     else:

@@ -5,7 +5,7 @@ import time
 import traceback
 import yaml
 from pyrogram import idle
-from spam import clients, log
+from spam import clients, log, session
 
 from spam.modules import ALL_MODULES, HELP_COMMANDS
 
@@ -54,6 +54,7 @@ async def start_bot():
     print("Bot run successfully!")
     await idle()
     await asyncio.gather(*(app.stop() for app in clients))
+    await session.close()
 
 if __name__ == '__main__':
     BOT_RUNTIME = int(time.time())

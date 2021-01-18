@@ -3,14 +3,16 @@ import os
 import sys
 import time
 import yaml
+import aiohttp
 import logging
 from pathlib import Path
-
 from pyrogram import Client, errors
+from spam.SpamProtection import SpamProtection
 
 StartTime = time.time()
 logging.basicConfig(level=logging.INFO)
 log = logging.getLogger()
+session = aiohttp.ClientSession()
 HELP_COMMANDS = {}
 clients = []
 
@@ -37,3 +39,5 @@ with Path('sessions') as p:
 for sessh in config['config']['sessions']:
     client = Client(sessh, api_id=config['telegram']['api_id'], api_hash=config['telegram']['api_hash'], plugins={'root': os.path.join(__package__, 'modules')}, workdir='sessions')
     clients.append(client)
+
+spb = SpamProtection(config['config']['spb_token'])

@@ -1,7 +1,6 @@
 telegram:
     api_id: 0
     api_hash: https://my.telegram.org
-    slave_bot_token: https://t.me/BotFather
 
 config:
     # This is the prefix used for commands (dot is most common)
@@ -9,4 +8,6 @@ config:
         - .
     sessions: 
       - yourusername
-
+    # If you are an operator, this is required. You will need to
+    # be promoted to an agent to use this feature.
+    spb_token: https://t.me/SpamProtectionBot

@@ -1,3 +1,5 @@
 pyrogram
 tgcrypto
 PyYAML
+intellivoid-spb
+aiohttp>=3.7.1
